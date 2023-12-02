@@ -51,7 +51,6 @@ export default {
 
         },
         bodyClick(e){
-        
            this.headerRef.firstElementChild.textContent = e.target.textContent
            this.$emit("update:modelValue",e.target.textContent)
         }
