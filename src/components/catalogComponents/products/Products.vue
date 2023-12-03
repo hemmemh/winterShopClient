@@ -1,5 +1,5 @@
 <template lang="">
-     <div  v-if="productsLoad" class="Catalog__product product-catalog">
+     <div   class="Catalog__product product-catalog">
         <div class="product-catalog__container">
             <NavVue/>
             <BodyVue/>
@@ -21,6 +21,7 @@ export default {
     methods: {
         ...mapMutations({
             setBrand:"product/setBrand",
+            setPage:"product/setPage",
             setSearch:"product/setSearch",
             setSearchEnd:"product/setSearchEnd",
             setSort:'product/setSort',
@@ -71,6 +72,7 @@ export default {
             sort:state=>state.product.sort,
             colorsActive:state=>state.product.colorsActive,
             productsLoad:state=>state.product.productsLoad,
+            updateLoading:state=>state.product.updateLoading,
             type:state=>state.product.type,
             products:state=>state.product.products,
             brand:state=>state.product.brand,
@@ -90,6 +92,7 @@ export default {
 
 
     mounted(){
+        this.setPage(1)
         this.getProducts(this.$route.query.type)
      
         this.$route.query.type && 
@@ -99,9 +102,11 @@ export default {
     
     watch:{
         $route (){
+            this.setPage(1)
             this.$route.query.type && 
             this.getProductsByType(this.$route.query.type)
             this.getBrands(this.$route.query.type)
+            
         },
 
         brand(){
@@ -132,7 +137,7 @@ export default {
             this.getProductsByParams([this.$route.query.type,this.page,this.limit,'',this.brand,this.sizesActive,null,this.minPriceEnd,this.maxPriceEnd,this.colorsActive,this.sort])
         },
         page(){
-            this.getProductsByParams([this.$route.query.type,this.page,this.limit,'',this.brand,this.sizesActive,null,this.minPriceEnd,this.maxPriceEnd,this.colorsActive,this.sort])
+            this.updateLoading && this.getProductsByParams([this.$route.query.type,this.page,this.limit,'',this.brand,this.sizesActive,null,this.minPriceEnd,this.maxPriceEnd,this.colorsActive,this.sort])
         },
         searchEnd(e){
             this.getProductsByParams([this.$route.query.type,this.page,this.limit,e,this.brand,this.sizesActive,null,this.minPriceEnd,this.maxPriceEnd,this.colorsActive,this.sort])

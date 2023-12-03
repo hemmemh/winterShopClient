@@ -2,12 +2,13 @@
  <nav class="body-navbar__actions actions-navbar _media-max">
                         <div v-if="!auth"  @click="SetLoginNavBar(true)" class="actions-navbar__action _icon-user-winter"> <span class="actions-navbar__text">ВОЙТИ</span> </div>
                         <div v-else @click="onLogOut" class="actions-navbar__action _icon-user-winter"> <span class="actions-navbar__text">ВЫЙТИ</span> </div>
-                        <div @click="$router.push('/love')"  class="actions-navbar__action _icon-star-winter _media"> <span class="actions-navbar__text">ИЗБРАННОЕ</span> 
+                        <div @click="$router.push('/love')"  class="actions-navbar__action _icon-star-winter _media"> 
+                            <span class="actions-navbar__text">ИЗБРАННОЕ</span> 
                             <span v-if="loves" :class=" lovesActive ? 'actions-navbar__count active' : 'actions-navbar__count'">{{loves}}</span> </div>
                         <div @click="$router.push('/basket')" class="actions-navbar__action _icon-cart-winter _media">
                              <span    class="actions-navbar__text" >КОРЗИНА</span>  
                               <span v-if="count" :class=" countActive ? 'actions-navbar__count active' : 'actions-navbar__count'">{{count}}</span>
-                            </div>
+                        </div>
                         <div v-if="this.$route.path === '/catalog'" @click="setSearch(!search)" class="actions-navbar__action _icon-search-winter"><span class="actions-navbar__text">ПОИСК</span></div>
                 </nav>
 </template>
@@ -173,6 +174,13 @@ export default {
     text-transform: uppercase;
     }
 &__count{
+
+    &.mobile{
+        display: flex;
+        width: 13px ;
+    height: 13px ;
+    font-size: 11px ;
+    }
     @media (any-hover: hover){
       
     }

@@ -24,6 +24,7 @@ export const productModule = {
        sizes:[],
        sizesActive:[],
        productsLoad:false,
+       updateLoading:false,
        searchEnd:'',
        search:'',
        timer:null
@@ -73,6 +74,7 @@ export const productModule = {
             state.colorsActive =  colorsActive
         },
         setPage(state, page){
+            state.updateLoading = true
             state.page =  page
         },
         setBrands(state, brands){
@@ -101,6 +103,9 @@ export const productModule = {
         },
         setSearch(state, search){
             state.search=  search
+        },
+        setUpdateLoading(state, updateLoading){
+            state.updateLoading =  updateLoading
         },
         
     },
@@ -135,6 +140,7 @@ export const productModule = {
                 commit('setMinPrice',min)
                 commit('setMaxPrice',max)
                 commit('setProductsLoad',true)
+               
 
             } catch (error) {
                 console.log(error);
@@ -158,6 +164,7 @@ export const productModule = {
 
        async getProductsByType({state,commit},typeId){
         try { 
+            commit('setUpdateLoading',false)
             const type = await getOneType({id:typeId})
             commit('setType',type)
             const data = await  getAllproduct(typeId,1,this.limit,'',null,null,null,null,null,null,state.sort)
@@ -165,6 +172,7 @@ export const productModule = {
             commit('setColorsActive',[])
             commit('setBrand',false)
             commit('setProducts',data)
+            commit('setPage',1)
 
             let min = data.responceAll[0].price
             let max = data.responceAll[0].price
@@ -219,12 +227,14 @@ export const productModule = {
        async getProductsByParams({commit},payload){
         console.log(commit);
         try {
+            commit('setUpdateLoading',false)
+    
             const products = await  getAllproduct(...payload)
           
             commit('setProducts',products)
         } catch (error) {
             console.log(error);
-        }
+        } 
        },
 
        async updateSearch({state,commit},e){

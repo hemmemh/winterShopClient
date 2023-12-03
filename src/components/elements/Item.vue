@@ -92,8 +92,17 @@ z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
-
+    transition: all 0.3s ease 0s;
+    opacity: 0.4;
+    @media (any-hover: hover){
+        &:hover{
+            opacity: 0.7;
+            transition: all 0.3s ease 0s;
+            transform: scale(1.1);
+        }
+    }
     &.active{
+        opacity: 1;
         background: $hoverColor;
     } 
     &::before{

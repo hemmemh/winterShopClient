@@ -50,7 +50,10 @@ export default {
   .Catalog {
 
 &__navigation {
-    margin-top: em(75);
+    //margin-top: em(75);
+    @media (max-width:$mobile){
+        //margin-top: em(10);
+    }
 }
 }
 .navigation-catalog {

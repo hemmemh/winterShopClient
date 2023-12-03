@@ -6,14 +6,14 @@
             <p class="Basket__summeryCount">{{totalSum}} ₽</p>
         </div>
         <div class="Basket__buy">
-            <MyButtonVue :className="'buy'">оформить заказ</MyButtonVue>
+            <MyButtonVue @click="onBuy" :className="'buy'">оформить заказ</MyButtonVue>
         </div>   
     </section>
 </template>
 <script>
 import {mapState } from 'vuex'
 import MyButtonVue from '@/components/UI/MyButton.vue'
-
+import { removeAll } from '@/http/basketApi'
 export default {
     components:{
         MyButtonVue
@@ -21,9 +21,17 @@ export default {
     computed: {
         ...mapState({
             count:state=>state.basket.count,
-            totalSum:state=>state.basket.totalSum
+            totalSum:state=>state.basket.totalSum,
+            basket:state=>state.user.user.basket
         })
     },
+    methods: {
+        onBuy() {
+            removeAll({id:this.basket}).then(()=>{
+                window.location.reload()
+            })
+        }
+    }
 }
 </script>
 <style lang="scss">
