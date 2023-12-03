@@ -1,5 +1,5 @@
 <template lang="">
-    <section  class="Home__new new-home">
+    <section v-if="loaded"  class="Home__new new-home">
         <div class="new-home__container">
             <div class="new-home__body">
                 <h2 class="new-home__title title-home">Новинки</h2>
@@ -15,7 +15,7 @@
                 :modules="modules" 
     class="newSliderWraper-home">
                         <swiper-slide v-for="product in products.responce">
-                             <ItemVue v-if="loaded" :product="product" :inLoves="loves?.find(el=>el.product._id == product._id) ? true : false"/>
+                             <ItemVue  :product="product" :inLoves="loves?.find(el=>el.product._id == product._id) ? true : false"/>
                         </swiper-slide>
                 </swiper>
                 </div>
@@ -29,6 +29,7 @@
         </div>
         
     </section >
+    <Loader/>
 </template>
 <script>
 
@@ -41,6 +42,10 @@ import ItemVue from '../../elements/Item.vue';
 import { getAllproduct } from '../../../http/productApi';
 import { getLoves } from '@/http/lovesApi';
 import store from '@/store';
+
+import LoaderElementVue from '@/components/UI/LoaderElement.vue';
+import Loader from '@/components/UI/Loader.vue';
+
 
 
 export default {

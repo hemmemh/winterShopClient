@@ -2,14 +2,20 @@
     <nav class="Product__navigation Navigation">
                                <div class="Navigation__container">
                                    <div class="Navigation__body">
-                                       Главная / Сноуборд / Сноуборд GNU Asym Carbon Credit Btx Multicolor
+                                    {{`Главная / ${product?.type?.name} / ${product?.name}`}}
+                                       
                                    </div>
                                </div>
             </nav>
 </template>
 <script>
+import { mapState } from 'vuex'
 export default {
-    
+    computed:{
+    ...mapState({
+      product:state=>state.productItem.product
+    })
+   },
 }
 </script >
 <style lang="scss" scoped>

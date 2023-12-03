@@ -57,7 +57,9 @@ export default {
     
 
     .product-item {
-        animation:item 0.5s ease-out both;
+        transition: all 0.3s ease 0s;
+      
+        animation:item 0.5s ease-out ;
         @keyframes item {
             0% {
                 transform: scale(0.95);
@@ -66,6 +68,13 @@ export default {
             100% {
                 transform: scale(1);
                 opacity: 1;  
+            }
+        }
+        @media (any-hover: hover){
+            &:hover{
+                transition: all 0.3s ease 0s;
+                transform: scale(0.99);
+                 filter: brightness(0.9);
             }
         }
     &__imageCover{
