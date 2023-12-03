@@ -12,7 +12,7 @@
     
                       <swiper-slide v-for="brand in brands">
                           <div class="brands-home__slide">
-                              <img :src="`http://localhost:5000/brands/${brand.image}`" alt=""/>
+                              <img :src="`${API_URL}/${brand.image}`" alt=""/>
                           </div>
                       </swiper-slide>
                 </swiper>
@@ -29,6 +29,7 @@ import { Autoplay} from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { mapActions,mapState } from 'vuex';
+import { API_URL } from '../../../utils/config';
 
 export default {
     components:{
@@ -38,6 +39,7 @@ export default {
   setup() {
      return {
        modules: [Autoplay],
+       API_URL:API_URL,
        breakpoints:{
                   '640': {
                     slidesPerView: 8,
