@@ -12,7 +12,7 @@
     
                       <swiper-slide v-for="brand in brands">
                           <div class="brands-home__slide">
-                              <img :src="`${API_URL}/${brand.image}`" alt=""/>
+                              <img :src="`${API_URL}/brands/${brand.image}`" alt=""/>
                           </div>
                       </swiper-slide>
                 </swiper>
