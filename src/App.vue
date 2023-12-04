@@ -38,6 +38,7 @@ mounted(){
             })
   }).catch(e=>{
     console.log(e.response?.data?.message);
+    localStorage.removeItem('Auth')
   }).finally(e=>{
     this.load = true
   })
